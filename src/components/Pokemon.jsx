@@ -6,9 +6,12 @@ import PokemonCard from './Card';
 
 export default function Pokemon() {
   
-  const [info, setInfo] = useState([])
+  const [info, setInfo] = useState(null)
   const { id } = useParams();
 
+  useEffect(() => {
+    getPokemon(id);
+  }, []);
   
   const getPokemon = async (pokemonId) => {
     const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
@@ -16,9 +19,6 @@ export default function Pokemon() {
     setInfo(users)
   };
 
-  useEffect(() => {
-    getPokemon(id);
-  }, []);
   return (
     <div className="d-flex justify-content-center">
       <PokemonCard 
